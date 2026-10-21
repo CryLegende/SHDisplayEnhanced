@@ -1,0 +1,96 @@
+# =================================================
+# SHDisplayEnhanced Configuration Principale
+# =================================================
+messages:
+  reload: "&7&l« &a&lSH &8&l» &aConfiguration rechargée avec succès."
+  no_permission: "&7&l« &f&lSH &8&l» &fCommande inconnue, essayez autre chose."
+  player_only: "&7&l« &c&lSH &8&l» &cCette commande ne peut être exécutée que par un joueur."
+
+gui:
+  click_sound: "UI_BUTTON_CLICK"
+  filler_item:
+    material: GRAY_STAINED_GLASS_PANE
+    name: " "
+  no_collections_item: # La clé reste la même pour la compatibilité du code
+    material: BARRIER
+    name: "&cAucune série trouvée"
+    lore:
+      - "&7Vérifiez le dossier 'plugins/SHDisplayEnhanced/collections/'"
+      - "&7et rechargez avec /shdeco reload."
+  navigation:
+    back_button:
+      material: PAPER
+      name: "&C⤾ Retour &7(Clic)"
+      lore: []
+  collection: # La clé reste la même
+    locked_item:
+      material: GRAY_DYE
+      name: "&cDécoration Verrouillée"
+      lore:
+        - "&8ᴄᴇᴛᴛᴇ ᴅᴇᴄᴏʀᴀᴛɪᴏɴ ɴ'ᴀ ᴘᴀѕ ᴇɴᴄᴏʀᴇ ᴇᴛᴇ ᴇɴʀᴇɢɪѕᴛʀᴇᴇ."
+        - ""
+        - "&7&l« &f&lDécoration requise &8&l»"
+        - "%item_name%"
+        - ""
+        - "&8&o(( &a&oCliquez ici avec l'objet sur votre"
+        - "&a&ocurseur pour l'enregistrer. &8&o))"
+    unlocked_lore:
+      - ""
+      - "&2✔ &7Enregistré le &a%date%"
+    reward_info_item:
+      material: BEACON
+      name: "&6Obtention des récompenses"
+      lore:
+        - ""
+        - "&7&l« &7Pour obtenir une récompense, il"
+        - "&7faut terminer cette série. &8&l»"
+        - ""
+        - "&f&lRécompense:"
+  main_menu:
+    title: "&lMenu &8| Décorations"
+    items:
+      collections: # La clé reste la même
+        material: BOOK
+        name: "&aSéries de Décorations"
+        slot: 11
+        lore:
+          - ""
+          - "&7&l« &7Découvrez toutes les séries"
+          - "&7de décorations et votre progressions ici &8&l»"
+          - ""
+          - "&8&o(( &a&oCliquez pour voir les séries &8&o))"
+      shop:
+        material: EMERALD
+        name: "&2Vendre des Décorations"
+        slot: 13
+        lore:
+          - ""
+          - "&7&l« &7Vendez vos décorations que"
+          - "&7vous possédez en double ! &8&l»"
+          - "&7Vendez les décorations"
+          - ""
+          - "&8&o(( &2&oCliquez pour vendre &8&o))"
+      stats:
+        material: PLAYER_HEAD
+        name: "&6Vos Statistiques"
+        slot: 15
+        lore:
+          - ""
+          - "&7&l« &7Complétez des séries d'items décoratifs"
+          - "&7pour gagner des récompenses ! &8&l»"
+          - ""
+          - "&fProgression Globale : &e%shde_global_progress%%"
+          - "&fSéries Terminées : &e%shde_collections_completed%&7/&6%shde_collections_total%"
+          - ""
+  shop_info_item:
+    material: OAK_SIGN
+    name: "&eComment vendre ?"
+    lore:
+      - ""
+      - "&7Pour qu'une décoration apparaisse ici,"
+      - "&7vous devez remplir deux conditions :"
+      - ""
+      - "&21. &aL'avoir déjà enregistrée."
+      - "&22. &aEn posséder une copie dans votre inventaire."
+      - ""
+      - "&8&o(( &e&oCliquez sur un objet pour le vendre. &8&o))"

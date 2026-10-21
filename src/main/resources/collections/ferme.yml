@@ -1,0 +1,58 @@
+# ID interne de la collection. DOIT ÊTRE UNIQUE et ne pas contenir d'espaces.
+collection_id: "ferme"
+
+# Paramètres du GUI pour cette collection
+gui:
+  title: "&2Collection de la Ferme"
+  size: 54 # Taille de l'inventaire. Doit être un multiple de 9.
+
+  # Item qui représente la collection dans le menu principal
+  menu_item:
+    material: WHEAT
+    name: "&eCollection de la Ferme"
+    lore:
+      - "&7Découvrez toutes les décorations"
+      - "&7sur le thème de la ferme !"
+      - ""
+      - "&fProgression : &a%shde_progress_this_collection%" # Placeholder interne
+      - "&fComplétée : %shde_completed_this_collection%" # 'Oui' ou 'Non'
+
+# Commandes à exécuter (par la console) quand un joueur complète 100% de la collection
+rewards:
+  commands:
+    - "eco give %player% 5000"
+    - "xp give %player% 1000"
+    - "broadcast &e%player% &a a terminé la collection de la Ferme et a gagné une récompense !"
+
+# Liste des items requis pour compléter la collection
+items:
+  # ID interne de l'item (unique DANS CE FICHIER)
+  grenouille_fermier:
+    slot: 10 # Le slot où l'item apparaîtra dans le GUI (de 0 à 53)
+    # Définition exacte de l'item spécial. C'est ce qui sera utilisé pour le reconnaître.
+    item:
+      material: LANTERN
+      name: '&eGrenouille Fermier &7(&e✯&7)'
+      enchantments:
+        LURE: 1
+      item-flags:
+        - HIDE_ENCHANTS
+      lore:
+        - '&5Item décoratif'
+
+  brouette_rustique:
+    slot: 12
+    item:
+      material: COMPOSTER
+      name: '&6Brouette Rustique'
+      lore:
+        - '&5Item décoratif'
+
+  epouvantail:
+    slot: 14
+    item:
+      material: ARMOR_STAND
+      name: "&eÉpouvantail"
+      lore:
+        - "&5Item décoratif"
+        - "&7Il fait peur aux oiseaux !"

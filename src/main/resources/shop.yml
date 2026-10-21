@@ -1,0 +1,244 @@
+# =================================================
+# Configuration de la boutique de vente
+# =================================================
+# Structure :
+# sellable_items:
+#   id_de_la_serie:
+#     id_de_la_decoration:
+#       sell_price_lore:
+#         - "&fPrix de vente:"
+#         - "&a+ XXX$"
+#       commands: [ "commande_console %player%" ]
+# =================================================
+
+sellable_items:
+  creatures:
+    Capybara:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Hedgehog:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Mushroom_brown:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Mushroom_red:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Mushroom_crimson:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 850,000 SHCoins", "&b+ 2,200 EXP", "&d+ 250 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 850000", "exp give %player% 2200", "shjobsadmin points give %player% 250" ]
+    Mushroom_warped:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 850,000 SHCoins", "&b+ 2,200 EXP", "&d+ 250 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 850000", "exp give %player% 2200", "shjobsadmin points give %player% 250" ]
+    Spot_robot:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 850,000 SHCoins", "&b+ 2,200 EXP", "&d+ 250 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 850000", "exp give %player% 2200", "shjobsadmin points give %player% 250" ]
+    Capybara_coco:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 3,500,000 SHCoins", "&e+ 1 Livre Légendaire", "&d+ 350 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 3500000", "advancedenchantments givercbook LEGENDAIRE %player% 1", "shjobsadmin points give %player% 350" ]
+    Nounours_Love:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 3,500,000 SHCoins", "&d+ 350 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 3500000", "shjobsadmin points give %player% 350" ]
+    Creeper_plushie:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 7,500,000 SHCoins", "&e+ 1 Livre Héroic", "&d+ 500 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 7500000", "advancedenchantments givercbook HEROIC %player% 1", "shjobsadmin points give %player% 500" ]
+    Fox_Galaxy:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 7,500,000 SHCoins", "&e+ 1 Livre Héroic", "&d+ 500 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 7500000", "advancedenchantments givercbook HEROIC %player% 1", "shjobsadmin points give %player% 500" ]
+
+  deco:
+    # NIVEAU 1 ETOILE
+    Cone:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Cone_2:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Gold_coins:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Shelf_1:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Trash_can:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    # NIVEAU 2 ETOILES
+    Anchor:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    crown:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Exclamation:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    gold_skull:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Red_cross:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Wood_deer:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    # NIVEAU 3 ETOILES
+    Copper_statue:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 850,000 SHCoins", "&b+ 2,200 EXP", "&d+ 250 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 850000", "exp give %player% 2200", "shjobsadmin points give %player% 250" ]
+    Knight:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 850,000 SHCoins", "&b+ 2,200 EXP", "&d+ 250 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 850000", "exp give %player% 2200", "shjobsadmin points give %player% 250" ]
+    Globe:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 850,000 SHCoins", "&b+ 2,200 EXP", "&d+ 250 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 850000", "exp give %player% 2200", "shjobsadmin points give %player% 250" ]
+    # NIVEAU 4 ETOILES
+    Chaise_bar:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 900,000 SHCoins", "&b+ 3,000 EXP", "&d+ 300 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 900000", "exp give %player% 3000", "shjobsadmin points give %player% 300" ]
+    Brouette:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 900,000 SHCoins", "&b+ 3,000 EXP", "&d+ 300 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 900000", "exp give %player% 3000", "shjobsadmin points give %player% 300" ]
+
+  nourriture:
+    Chicken:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Cocktails:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Pepper:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Sandwich:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Sushi:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Picnic:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Pizza:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Whisky:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 850,000 SHCoins", "&b+ 2,200 EXP", "&d+ 250 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 850000", "exp give %player% 2200", "shjobsadmin points give %player% 250" ]
+    CB12:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 3,500,000 SHCoins", "&e+ 1 Livre Légendaire", "&d+ 350 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 3500000", "advancedenchantments givercbook LEGENDAIRE %player% 1", "shjobsadmin points give %player% 350" ]
+  grenouilles:
+    Frog_farmer:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Frog_fisherman:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Frog_sit:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Frog_backpack:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Frog_flute:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Frog_guitar:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Frog_boat:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Frog_witch:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Frog_suit:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 850,000 SHCoins", "&b+ 2,200 EXP", "&d+ 250 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 850000", "exp give %player% 2200", "shjobsadmin points give %player% 250" ]
+    Frog_music_group:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 7,500,000 SHCoins", "&e+ 1 Livre Héroic", "&d+ 500 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 7500000", "advancedenchantments givercbook HEROIC %player% 1", "shjobsadmin points give %player% 500" ]
+  halloween:
+    Suspicious_bottle:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Tentacle:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Epouventail:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Zombie:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Pumpkin_monster:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 3,500,000 SHCoins", "&e+ 1 Livre Légendaire", "&d+ 350 Points de jobs" ]
+      commands: [ "eco give %player% 3500000", "advancedenchantments givercbook LEGENDAIRE %player% 1", "shjobsadmin points give %player% 350" ]
+    Chaudron_galaxy:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 7,500,000 SHCoins", "&e+ 1 Livre Héroïque", "&d+ 500 Points de jobs" ]
+      commands: [ "eco give %player% 7500000", "advancedenchantments givercbook HEROIC %player% 1", "shjobsadmin points give %player% 500" ]
+  noel:
+    # NIVEAU 1 ETOILE
+    Gingerbread:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Present:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Snowball:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    # NIVEAU 2 ETOILES
+    Many_present:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Snowman:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    # NIVEAU 3 ETOILES
+    Manchot:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 850,000 SHCoins", "&b+ 2,200 EXP", "&d+ 250 Points de jobs" ]
+      commands: [ "eco give %player% 850000", "exp give %player% 2200", "shjobsadmin points give %player% 250" ]
+    Snow_Fox:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 850,000 SHCoins", "&b+ 2,200 EXP", "&d+ 250 Points de jobs" ]
+      commands: [ "eco give %player% 850000", "exp give %player% 2200", "shjobsadmin points give %player% 250" ]
+    # NIVEAU 4 ETOILES
+    Almost_snowman:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 3,500,000 SHCoins", "&e+ 1 Livre Légendaire", "&d+ 350 Points de jobs" ]
+      commands: [ "eco give %player% 3500000", "advancedenchantments givercbook LEGENDAIRE %player% 1", "shjobsadmin points give %player% 350" ]
+    # NIVEAU 5 ETOILES
+    Manchots_galaxy:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 7,500,000 SHCoins", "&e+ 1 Livre Héroïque", "&d+ 500 Points de jobs" ]
+      commands: [ "eco give %player% 7500000", "advancedenchantments givercbook HEROIC %player% 1", "shjobsadmin points give %player% 500" ]
+
+  paques:
+    Egg_basket:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 5,000 SHCoins", "&b+ 150 EXP", "&d+ 20 Points de jobs" ]
+      commands: [ "eco give %player% 5000", "exp give %player% 150", "shjobsadmin points give %player% 20" ]
+    Big_egg:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Big_carrot:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 25,000 SHCoins", "&b+ 500 EXP", "&d+ 40 Points de jobs" ]
+      commands: [ "eco give %player% 25000", "exp give %player% 500", "shjobsadmin points give %player% 40" ]
+    Easter_rabbit:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 850,000 SHCoins", "&b+ 2,200 EXP", "&d+ 250 Points de jobs" ]
+      commands: [ "eco give %player% 850000", "exp give %player% 2200", "shjobsadmin points give %player% 250" ]
+  brainrot:
+    Boneca_ambalabu:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 850,000 SHCoins", "&b+ 2,200 EXP", "&d+ 250 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 850000", "exp give %player% 2200", "shjobsadmin points give %player% 250" ]
+    Lirili_larila:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 3,500,000 SHCoins", "&e+ 1 Livre Légendaire", "&d+ 350 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 3500000", "advancedenchantments givercbook LEGENDAIRE %player% 1", "shjobsadmin points give %player% 350" ]
+    Frigo_camelo:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 7,500,000 SHCoins", "&e+ 1 Livre Héroic", "&d+ 500 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 7500000", "advancedenchantments givercbook HEROIC %player% 1", "shjobsadmin points give %player% 500" ]
+    Glorbo_frutodrillo:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 7,500,000 SHCoins", "&e+ 1 Livre Héroic", "&d+ 500 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 7500000", "advancedenchantments givercbook HEROIC %player% 1", "shjobsadmin points give %player% 500" ]
+    Trippi_troppi:
+      sell_price_lore: [ "", "&fPrix de vente:", "&a+ 7,500,000 SHCoins", "&e+ 1 Livre Héroic", "&d+ 500 Points de jobs", "", "&7&o(Cliquez pour &a&ovendre &7&ocet item décoratif)" ]
+      commands: [ "eco give %player% 7500000", "advancedenchantments givercbook HEROIC %player% 1", "shjobsadmin points give %player% 500" ]

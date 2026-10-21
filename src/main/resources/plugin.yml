@@ -1,0 +1,26 @@
+name: SHDisplayEnhanced
+version: '${project.version}'
+main: org.Cry_Legende.sHDisplayEnhanced.SHDisplayEnhanced
+api-version: '1.20'
+author: Cry_Legende
+description: Améliore les items de display avec une boutique et un système de collections.
+softdepend: [PlaceholderAPI, Vault]
+
+commands:
+  deco:
+    description: Ouvre le menu principal des collections et de la boutique.
+    usage: /<command>
+    aliases: [decorations]
+  shdeco:
+    description: Commande d'administration pour SHDisplayEnhanced.
+    usage: /<command> reload
+    aliases: [shdisplay]
+    permission: shdisplayenhanced.admin
+
+permissions:
+  shdisplayenhanced.user:
+    description: Permet d'utiliser la commande /deco.
+    default: true
+  shdisplayenhanced.admin:
+    description: Permet d'utiliser les commandes d'administration.
+    default: op
