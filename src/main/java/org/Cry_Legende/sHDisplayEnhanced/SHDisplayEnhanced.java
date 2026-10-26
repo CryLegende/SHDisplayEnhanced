@@ -59,8 +59,10 @@ public final class SHDisplayEnhanced extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info("Sauvegarde des données des joueurs en ligne...");
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            playerManager.savePlayerDataSync(player.getUniqueId());
+        if (playerManager != null) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                playerManager.savePlayerDataSync(player.getUniqueId());
+            }
         }
 
         if (databaseManager != null) {

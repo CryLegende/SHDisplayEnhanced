@@ -5,6 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.InventoryHolder;
 
 public class GUIListener implements Listener {
@@ -23,6 +24,12 @@ public class GUIListener implements Listener {
         }
 
         AbstractGUI gui = (AbstractGUI) topHolder;
+
+        // Le double-clic dans l'inventaire du joueur rassemble les items identiques, GUI compris : on l'interdit
+        if (event.getAction() == InventoryAction.COLLECT_TO_CURSOR) {
+            event.setCancelled(true);
+            return;
+        }
 
         // --- CORRECTION DU BUG SHIFT+CLIC ---
         // Si le joueur clique dans son propre inventaire avec SHIFT,
@@ -45,5 +52,20 @@ public class GUIListener implements Listener {
 
         // Si le clic a lieu en dehors du GUI (dans l'inventaire du joueur, sans shift),
         // on ne fait rien et on laisse le comportement par défaut (ex: prendre un item sur le curseur).
+    }
+
+    // Un glisser-déposer au-dessus du GUI y déposerait des items, perdus à la fermeture
+    @EventHandler
+    public void onInventoryDrag(InventoryDragEvent event) {
+        if (!(event.getInventory().getHolder() instanceof AbstractGUI)) {
+            return;
+        }
+        int topSize = event.getInventory().getSize();
+        for (int rawSlot : event.getRawSlots()) {
+            if (rawSlot < topSize) {
+                event.setCancelled(true);
+                return;
+            }
+        }
     }
 }

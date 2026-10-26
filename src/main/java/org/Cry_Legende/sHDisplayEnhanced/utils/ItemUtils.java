@@ -3,6 +3,8 @@ package org.Cry_Legende.sHDisplayEnhanced.utils;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Objects;
+
 public class ItemUtils {
 
     /**
@@ -31,7 +33,7 @@ public class ItemUtils {
 
         // Compare le nom, le lore, les enchantements et les flags.
         return handMeta.getDisplayName().equals(requiredMeta.getDisplayName()) &&
-            (handMeta.getLore() != null && handMeta.getLore().equals(requiredMeta.getLore())) &&
+            Objects.equals(handMeta.getLore(), requiredMeta.getLore()) &&
             handMeta.getEnchants().equals(requiredMeta.getEnchants()) &&
             handMeta.getItemFlags().equals(requiredMeta.getItemFlags());
     }

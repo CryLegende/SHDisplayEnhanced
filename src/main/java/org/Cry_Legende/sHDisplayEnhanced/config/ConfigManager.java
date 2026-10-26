@@ -3,6 +3,8 @@ package org.Cry_Legende.sHDisplayEnhanced.config;
 import org.Cry_Legende.sHDisplayEnhanced.SHDisplayEnhanced;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class ConfigManager {
@@ -46,9 +49,8 @@ public class ConfigManager {
         playerOnlyMessage = loadString(config, "messages.player_only", "&cCette commande ne peut être exécutée que par un joueur.");
         reloadMessage = loadString(config, "messages.reload", "&aConfiguration rechargée.");
 
-        try {
-            clickSound = Sound.valueOf(config.getString("gui.click_sound", "UI_BUTTON_CLICK").toUpperCase());
-        } catch (IllegalArgumentException e) {
+        clickSound = sound(config.getString("gui.click_sound", "UI_BUTTON_CLICK"));
+        if (clickSound == null) {
             plugin.getLogger().warning("Le son '" + config.getString("gui.click_sound") + "' n'est pas valide. Utilisation de UI_BUTTON_CLICK par défaut.");
             clickSound = Sound.UI_BUTTON_CLICK;
         }
@@ -95,6 +97,21 @@ public class ConfigManager {
             plugin.getLogger().warning("Erreur lors de la création d'un item depuis la config: " + section.getCurrentPath());
             e.printStackTrace();
             return new ItemStack(Material.BARRIER, 1);
+        }
+    }
+
+    /** Son lu en config : ancien nom (ENTITY_PLAYER_LEVELUP) ou clé (minecraft:entity.player.levelup). */
+    static Sound sound(String raw) {
+        if (raw == null || raw.isBlank()) return null;
+        String s = raw.trim();
+        if (s.indexOf(':') >= 0 || s.indexOf('.') >= 0) {
+            NamespacedKey key = NamespacedKey.fromString(s.toLowerCase(Locale.ROOT));
+            return key == null ? null : Registry.SOUND_EVENT.get(key);
+        }
+        try {
+            return (Sound) Sound.class.getField(s.toUpperCase(Locale.ROOT)).get(null);
+        } catch (ReflectiveOperationException | ClassCastException e) {
+            return null;
         }
     }
 

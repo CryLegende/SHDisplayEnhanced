@@ -1,12 +1,16 @@
 package org.Cry_Legende.sHDisplayEnhanced.model;
 
+import org.Cry_Legende.sHDisplayEnhanced.SHDisplayEnhanced;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -31,6 +35,11 @@ public class CollectionItem {
         }
 
         Material material = Material.matchMaterial(itemConfig.getString("material", "STONE"));
+        if (material == null) {
+            // Un matériau invalide ferait échouer le chargement de toutes les séries
+            SHDisplayEnhanced.getInstance().getLogger().warning("Matériau invalide '" + itemConfig.getString("material") + "' pour la décoration '" + id + "' (" + itemConfig.getCurrentPath() + ").");
+            material = Material.BARRIER;
+        }
         ItemStack itemStack = new ItemStack(material, 1);
         ItemMeta meta = itemStack.getItemMeta();
 
@@ -45,7 +54,7 @@ public class CollectionItem {
 
             if (itemConfig.isConfigurationSection("enchantments")) {
                 for (String enchantKey : itemConfig.getConfigurationSection("enchantments").getKeys(false)) {
-                    Enchantment enchantment = Enchantment.getByName(enchantKey.toUpperCase());
+                    Enchantment enchantment = enchantment(enchantKey);
                     if (enchantment != null) {
                         meta.addEnchant(enchantment, itemConfig.getInt("enchantments." + enchantKey), true);
                     }
@@ -64,6 +73,14 @@ public class CollectionItem {
             itemStack.setItemMeta(meta);
         }
         return itemStack;
+    }
+
+    /** Enchantement lu en config : clé (minecraft:lure, lure) ou ancien nom (LURE, DAMAGE_ALL). */
+    @SuppressWarnings("deprecation")
+    private static Enchantment enchantment(String raw) {
+        NamespacedKey key = NamespacedKey.fromString(raw.trim().toLowerCase(Locale.ROOT));
+        Enchantment found = key == null ? null : Registry.ENCHANTMENT.get(key);
+        return found != null ? found : Enchantment.getByName(raw.trim().toUpperCase(Locale.ROOT));
     }
 
     // Getters

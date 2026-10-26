@@ -3,15 +3,18 @@ package org.Cry_Legende.sHDisplayEnhanced.managers;
 import org.Cry_Legende.sHDisplayEnhanced.SHDisplayEnhanced;
 import org.Cry_Legende.sHDisplayEnhanced.model.Collection;
 
-import java.util.HashMap;
+import org.bukkit.Bukkit;
+
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerManager {
 
     private final SHDisplayEnhanced plugin;
-    private final Map<UUID, Map<String, Long>> playerDataCache = new HashMap<>();
+    // Lu et écrit depuis le thread principal et depuis les tâches asynchrones de chargement/sauvegarde
+    private final Map<UUID, Map<String, Long>> playerDataCache = new ConcurrentHashMap<>();
 
     public PlayerManager(SHDisplayEnhanced plugin) {
         this.plugin = plugin;
@@ -20,8 +23,18 @@ public class PlayerManager {
     public void loadPlayerData(UUID uuid) {
         CompletableFuture.runAsync(() -> {
             Map<String, Long> completedItems = plugin.getDatabaseManager().getCompletedItems(uuid);
-            playerDataCache.put(uuid, completedItems);
-            plugin.getLogger().info("Données de série chargées pour le joueur " + uuid);
+            if (completedItems == null) return; // lecture impossible (déjà journalisé) : rien en cache
+            if (!plugin.isEnabled()) return;
+            Bukkit.getScheduler().runTask(plugin, () -> {
+                // Le joueur a pu quitter pendant la lecture : on ne garde pas ses données en mémoire
+                if (Bukkit.getPlayer(uuid) == null) return;
+                Map<String, Long> loaded = new ConcurrentHashMap<>(completedItems);
+                // Une série validée pendant le chargement ne doit pas être écrasée
+                Map<String, Long> already = playerDataCache.get(uuid);
+                if (already != null) already.forEach(loaded::putIfAbsent);
+                playerDataCache.put(uuid, loaded);
+                plugin.getLogger().info("Données de série chargées pour le joueur " + uuid);
+            });
         });
     }
 
@@ -50,7 +63,7 @@ public class PlayerManager {
     }
 
     public void setCompleted(UUID uuid, String collectionId, String itemId) {
-        playerDataCache.computeIfAbsent(uuid, k -> new HashMap<>())
+        playerDataCache.computeIfAbsent(uuid, k -> new ConcurrentHashMap<>())
             .put(collectionId + "." + itemId, System.currentTimeMillis());
     }
 

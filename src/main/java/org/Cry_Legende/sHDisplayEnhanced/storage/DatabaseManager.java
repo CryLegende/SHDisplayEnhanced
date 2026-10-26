@@ -61,7 +61,7 @@ public class DatabaseManager {
     /**
      * Ferme la connexion à la base de données.
      */
-    public void disconnect() {
+    public synchronized void disconnect() {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
@@ -78,7 +78,9 @@ public class DatabaseManager {
      * @param uuid L'UUID du joueur.
      * @return Une Map contenant l'ID de l'item et le timestamp de complétion.
      */
-    public Map<String, Long> getCompletedItems(UUID uuid) {
+    public synchronized Map<String, Long> getCompletedItems(UUID uuid) {
+        // Renvoie null si la lecture échoue : une map vide serait prise pour "aucune progression" et écrasée à la sauvegarde
+        if (connection == null) return null;
         String sql = "SELECT completed_item, completion_date FROM player_collections WHERE uuid = ?";
         Map<String, Long> items = new HashMap<>();
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -89,38 +91,45 @@ public class DatabaseManager {
             }
         } catch (SQLException e) {
             plugin.getLogger().log(Level.SEVERE, "Impossible de récupérer les données pour le joueur " + uuid, e);
+            return null;
         }
         return items;
     }
 
     /**
-     * Sauvegarde l'ensemble de la progression d'un joueur.
-     * Pour garantir l'intégrité, les anciennes données sont supprimées avant d'insérer les nouvelles.
+     * Sauvegarde la progression d'un joueur.
+     * La progression ne fait qu'augmenter : on écrit sans rien supprimer, dans une transaction, pour qu'un échec
+     * en cours de route ne puisse pas effacer les données déjà enregistrées.
      *
      * @param uuid  L'UUID du joueur.
      * @param items La Map complète de la progression du joueur à sauvegarder.
      */
-    public void saveCompletedItems(UUID uuid, Map<String, Long> items) {
-        String deleteSql = "DELETE FROM player_collections WHERE uuid = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(deleteSql)) {
-            pstmt.setString(1, uuid.toString());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            plugin.getLogger().log(Level.SEVERE, "Erreur lors de la suppression des anciennes données pour le joueur " + uuid, e);
-            return; // Arrêter si la suppression échoue
-        }
-
-        String insertSql = "INSERT INTO player_collections(uuid, completed_item, completion_date) VALUES(?, ?, ?)";
-        try (PreparedStatement pstmt = connection.prepareStatement(insertSql)) {
-            for (Map.Entry<String, Long> entry : items.entrySet()) {
-                pstmt.setString(1, uuid.toString());
-                pstmt.setString(2, entry.getKey());
-                pstmt.setLong(3, entry.getValue());
-                pstmt.addBatch();
+    public synchronized void saveCompletedItems(UUID uuid, Map<String, Long> items) {
+        if (connection == null) return;
+        String sql = "INSERT OR REPLACE INTO player_collections(uuid, completed_item, completion_date) VALUES(?, ?, ?)";
+        try {
+            connection.setAutoCommit(false);
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                for (Map.Entry<String, Long> entry : items.entrySet()) {
+                    pstmt.setString(1, uuid.toString());
+                    pstmt.setString(2, entry.getKey());
+                    pstmt.setLong(3, entry.getValue());
+                    pstmt.addBatch();
+                }
+                pstmt.executeBatch();
             }
-            pstmt.executeBatch();
+            connection.commit();
         } catch (SQLException e) {
-            plugin.getLogger().log(Level.SEVERE, "Erreur lors de la sauvegarde des nouvelles données pour le joueur " + uuid, e);
+            plugin.getLogger().log(Level.SEVERE, "Erreur lors de la sauvegarde des données pour le joueur " + uuid, e);
+            try {
+                connection.rollback();
+            } catch (SQLException ignored) {
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ignored) {
+            }
         }
     }
 }

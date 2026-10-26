@@ -40,6 +40,13 @@ public class ShopManager {
             ConfigurationSection catalogueSection = mainSection.getConfigurationSection(catalogueId);
             if (catalogueSection == null) continue;
 
+            if (plugin.getCollectionManager().getCollection(catalogueId) == null) {
+                // Une seule ligne par série absente (au lieu d'une par objet) avec la cause probable
+                plugin.getLogger().warning("La série '" + catalogueId + "' n'est pas chargée : ses " + catalogueSection.getKeys(false).size()
+                    + " objet(s) vendable(s) de shop.yml sont ignorés. Seuls les fichiers placés directement dans collections/ sont lus (pas ceux des sous-dossiers), avec un 'collection_id' identique.");
+                continue;
+            }
+
             for (String itemId : catalogueSection.getKeys(false)) {
                 String fullId = catalogueId + "." + itemId;
                 ConfigurationSection itemSection = catalogueSection.getConfigurationSection(itemId);
