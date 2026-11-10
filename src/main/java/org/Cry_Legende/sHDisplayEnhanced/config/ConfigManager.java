@@ -45,9 +45,9 @@ public class ConfigManager {
     public void load() {
         FileConfiguration config = plugin.getConfig();
 
-        noPermissionMessage = loadString(config, "messages.no_permission", "&cVous n'avez pas la permission.");
-        playerOnlyMessage = loadString(config, "messages.player_only", "&cCette commande ne peut être exécutée que par un joueur.");
-        reloadMessage = loadString(config, "messages.reload", "&aConfiguration rechargée.");
+        noPermissionMessage = plugin.message("no_permission");
+        playerOnlyMessage = plugin.message("player_only");
+        reloadMessage = plugin.message("reload");
 
         clickSound = sound(config.getString("gui.click_sound", "UI_BUTTON_CLICK"));
         if (clickSound == null) {

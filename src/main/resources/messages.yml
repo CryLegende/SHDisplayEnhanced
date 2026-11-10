@@ -1,0 +1,36 @@
+# ======================================================================== #
+#                 SHDisplayEnhanced - Fichier de Messages                  #
+# ======================================================================== #
+#
+# Les codes couleur utilisent '&'.
+#
+# Variables :
+#   %collection%  Identifiant de la série terminée (series_completed).
+#   %item%        Nom de la décoration demandée (wrong_item).
+#   %players%, %added%, %present%  Bilan de /shdeco import (import_done).
+#   %reason%      Cause de l'échec (import_failed).
+#
+# ======================================================================== #
+
+# Commandes
+no_permission: "&7&l« &f&lSH &8&l» &fCommande inconnue, essayez autre chose."
+player_only: "&7&l« &c&lSH &8&l» &cCette commande ne peut être exécutée que par un joueur."
+reload: "&7&l« &a&lSH &8&l» &aConfiguration rechargée avec succès."
+usage: "&cUsage: /shdeco reload"
+usage_network: "&cUsage: /shdeco <reload|import>"
+
+# Menu des séries
+cursor_item_required: "&cPrenez l'objet requis dans votre inventaire et placez-le ici."
+wrong_item: "&cVous n'avez pas la bonne décoration sur votre curseur. Requis : %item%"
+series_completed: "&aVous avez terminé la série '%collection%' !"
+
+# Menu de vente
+sell_item_missing: "&cErreur: L'objet n'a pas pu être trouvé dans votre inventaire."
+
+# Plusieurs serveurs (SHNetwork) : les décorations du joueur sont encore en cours de lecture
+data_loading: "&7&l« &e&lSH &8&l» &7Vos &edécorations &7se chargent, réessayez dans un instant."
+
+# /shdeco import (SHNetwork)
+import_started: "&7&l« &e&lSH &8&l» &7Importation de &eplayerdata.db &7dans la base du réseau..."
+import_done: "&7&l« &a&lSH &8&l» &7Importation terminée : &a%players% &7joueurs, &a%added% &7décorations ajoutées, &e%present% &7déjà présentes."
+import_failed: "&7&l« &c&lSH &8&l» &7Importation impossible : &c%reason%&7."

@@ -1,10 +1,24 @@
-# =================================================
-# SHDisplayEnhanced Configuration Principale
-# =================================================
-messages:
-  reload: "&7&l« &a&lSH &8&l» &aConfiguration rechargée avec succès."
-  no_permission: "&7&l« &f&lSH &8&l» &fCommande inconnue, essayez autre chose."
-  player_only: "&7&l« &c&lSH &8&l» &cCette commande ne peut être exécutée que par un joueur."
+# ======================================================================== #
+#                SHDisplayEnhanced - Configuration Principale              #
+# ======================================================================== #
+#
+# Plugin : menu /deco des décorations (display) : séries à compléter en y plaçant les décorations,
+# récompense de chaque série terminée, boutique pour revendre les doubles. Les séries sont dans
+# collections/*.yml, les prix de vente dans shop.yml, les textes dans messages.yml.
+# Avec SHNetwork, les décorations enregistrées et les séries récompensées sont dans la base du réseau
+# (voir la section 'reseau' en bas du fichier).
+#
+# Commandes :
+#   /deco (alias /decorations)  Ouvre le menu des séries et de la boutique.
+#   /shdeco reload              Recharge la configuration, les séries et la boutique.
+#   /shdeco import              Avec SHNetwork : copie playerdata.db dans la base du réseau,
+#                               sans toucher aux décorations déjà présentes.
+#
+# Permissions :
+#   shdisplayenhanced.user    Utiliser /deco (par défaut : tous les joueurs).
+#   shdisplayenhanced.admin   /shdeco reload et /shdeco import (par défaut : op).
+#
+# ======================================================================== #
 
 gui:
   click_sound: "UI_BUTTON_CLICK"
@@ -94,3 +108,21 @@ gui:
       - "&22. &aEn posséder une copie dans votre inventaire."
       - ""
       - "&8&o(( &e&oCliquez sur un objet pour le vendre. &8&o))"
+
+# Plusieurs serveurs Opale (SHNetwork). Sans SHNetwork, ou avec actif: false, rien de cette section n'est lu :
+# les décorations restent dans playerdata.db de ce serveur, écrites à la déconnexion, comme avant.
+# Avec SHNetwork, la base du réseau remplace playerdata.db : les décorations d'un joueur sont lues à son arrivée,
+# une fois que le serveur de départ a fini d'écrire, et écrites au moment où il les enregistre. La récompense d'une
+# série est réservée en base : un seul serveur la donne, une seule fois. Reprendre playerdata.db : /shdeco import.
+# Demande un redémarrage : tout (actif, attente-depart-secondes, base-de-donnees).
+reseau:
+  actif: true
+  # Attente maximale, en secondes, de la fin des écritures du serveur de départ avant de lire les décorations du joueur
+  attente-depart-secondes: 30
+  # Base partagée par tous les serveurs : tables displayenhanced_items (décorations) et displayenhanced_rewards (séries payées)
+  base-de-donnees:
+    url: "jdbc:mariadb://127.0.0.1:3306/bo_net"
+    utilisateur: shdisplayenhanced
+    mot-de-passe: CHANGE_ME
+    # Délai maximal de connexion et de réponse de la base, en millisecondes
+    delai-ms: 3000

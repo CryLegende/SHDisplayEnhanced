@@ -3,6 +3,7 @@ package org.Cry_Legende.sHDisplayEnhanced.gui;
 import org.Cry_Legende.sHDisplayEnhanced.SHDisplayEnhanced;
 import org.Cry_Legende.sHDisplayEnhanced.config.ConfigManager;
 import org.Cry_Legende.sHDisplayEnhanced.managers.PlayerManager;
+import org.Cry_Legende.sHDisplayEnhanced.network.NetworkDisplay;
 import org.Cry_Legende.sHDisplayEnhanced.model.Collection;
 import org.Cry_Legende.sHDisplayEnhanced.model.CollectionItem;
 import org.Cry_Legende.sHDisplayEnhanced.utils.ItemUtils;
@@ -113,7 +114,15 @@ public class SingleCollectionGUI extends AbstractGUI {
 
             if (cursorItem == null || cursorItem.getType() == Material.AIR) {
                 player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
-                player.sendMessage("§cPrenez l'objet requis dans votre inventaire et placez-le ici.");
+                player.sendMessage(plugin.message("cursor_item_required"));
+                return;
+            }
+
+            // Avec SHNetwork, les décorations du joueur viennent de la base : avant leur lecture, rien ne s'enregistre
+            NetworkDisplay network = plugin.getNetwork();
+            if (network != null && !network.isLoaded(player.getUniqueId())) {
+                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
+                player.sendMessage(plugin.message("data_loading"));
                 return;
             }
 
@@ -121,7 +130,7 @@ public class SingleCollectionGUI extends AbstractGUI {
                 completeItem(collectionItem, cursorItem);
             } else {
                 player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
-                player.sendMessage("§cVous n'avez pas la bonne décoration sur votre curseur. Requis : " + requiredItemName);
+                player.sendMessage(plugin.message("wrong_item").replace("%item%", requiredItemName));
             }
         });
     }
@@ -136,9 +145,13 @@ public class SingleCollectionGUI extends AbstractGUI {
         refresh();
 
         if (playerManager.hasCompletedCollection(player.getUniqueId(), collection)) {
-            player.playSound(player.getLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1f, 1f);
-            player.sendMessage("§aVous avez terminé la série '" + collection.getId() + "' !");
-            collection.executeRewardCommands(player);
+            NetworkDisplay network = plugin.getNetwork();
+            if (network != null) {
+                // Avec SHNetwork, la base décide quel serveur donne la récompense, une seule fois
+                network.completeSeries(player, collection);
+            } else {
+                plugin.grantSeries(player, collection);
+            }
         }
     }
 

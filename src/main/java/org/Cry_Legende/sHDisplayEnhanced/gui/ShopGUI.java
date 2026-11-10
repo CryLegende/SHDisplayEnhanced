@@ -58,7 +58,7 @@ public class ShopGUI extends AbstractGUI {
                         refresh();
                     } else {
                         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
-                        player.sendMessage("§cErreur: L'objet n'a pas pu être trouvé dans votre inventaire.");
+                        player.sendMessage(plugin.message("sell_item_missing"));
                     }
                 });
 

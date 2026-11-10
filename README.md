@@ -20,14 +20,28 @@ Utilisé sur : **Opale**.
 
 ## Dépendances
 
-- Optionnelles : `PlaceholderAPI`, `Vault`
+- Optionnelles : `PlaceholderAPI`, `Vault`, `SHNetwork` (plusieurs serveurs Opale, voir plus bas)
 
 ## Commandes
 
 | Commande | Alias | Description | Permission |
 |---|---|---|---|
 | `/deco` | `/decorations` | Ouvre le menu principal des collections et de la boutique. | — |
-| `/shdeco` | `/shdisplay` | Commande d'administration pour SHDisplayEnhanced. | `shdisplayenhanced.admin` |
+| `/shdeco reload` | `/shdisplay` | Recharge la configuration, les séries et la boutique. | `shdisplayenhanced.admin` |
+| `/shdeco import` | `/shdisplay` | Avec SHNetwork : copie `playerdata.db` dans la base du réseau, sans toucher aux décorations déjà présentes. | `shdisplayenhanced.admin` |
+
+## Plusieurs serveurs Opale (SHNetwork)
+
+Sans SHNetwork, ou avec `reseau.actif: false`, rien ne change : les décorations enregistrées sont dans `playerdata.db` (SQLite) de chaque serveur et écrites à la déconnexion.
+
+Avec SHNetwork, la base `bo_net` remplace `playerdata.db` :
+
+- les décorations d'un joueur sont lues à son arrivée, une fois que le serveur de départ a fini ses écritures (`awaitSaved`) ; avant cela, aucune décoration ne peut être enregistrée dans le menu ;
+- chaque décoration est écrite en base au moment où le joueur l'enregistre (`INSERT IGNORE`), plus à la déconnexion ; la sauvegarde de départ n'attend que les écritures en cours ;
+- la récompense d'une série est réservée en base (`INSERT IGNORE` dans `displayenhanced_rewards`) : le serveur qui crée la ligne donne la récompense, l'autre ne donne rien. Si la base ne répond pas après trois essais, aucune récompense n'est donnée et la console l'indique ;
+- `/shdeco import` reprend `playerdata.db` dans la base ; il peut être relancé sans rien écraser.
+
+Tables : `displayenhanced_items` (joueur, décoration, date) et `displayenhanced_rewards` (joueur, série, date), créées au démarrage si l'utilisateur a le droit CREATE (`sql/schema.sql` pour le faire à la main).
 
 ## Permissions
 
@@ -43,6 +57,7 @@ Fichiers par défaut repris du serveur (secrets remplacés par `CHANGE_ME`). Cli
 <pre>
 plugins/SHDisplayEnhanced/
 ├── <a href="src/main/resources/config.yml">config.yml</a>
+├── <a href="src/main/resources/messages.yml">messages.yml</a>
 ├── <a href="src/main/resources/shop.yml">shop.yml</a>
 └── collections/
     └── <a href="src/main/resources/collections/ferme.yml">ferme.yml</a>

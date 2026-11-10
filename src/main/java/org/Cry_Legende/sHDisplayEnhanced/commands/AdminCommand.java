@@ -24,8 +24,16 @@ public class AdminCommand implements CommandExecutor {
         if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
             plugin.reloadPlugin();
             sender.sendMessage(plugin.getConfigManager().getReloadMessage());
+        } else if (args.length > 0 && args[0].equalsIgnoreCase("import") && plugin.getNetwork() != null) {
+            sender.sendMessage(plugin.message("import_started"));
+            plugin.getNetwork().importLocal(
+                result -> sender.sendMessage(plugin.message("import_done")
+                    .replace("%players%", String.valueOf(result.players()))
+                    .replace("%added%", String.valueOf(result.added()))
+                    .replace("%present%", String.valueOf(result.present()))),
+                reason -> sender.sendMessage(plugin.message("import_failed").replace("%reason%", String.valueOf(reason))));
         } else {
-            sender.sendMessage("§cUsage: /shdeco reload");
+            sender.sendMessage(plugin.message(plugin.getNetwork() != null ? "usage_network" : "usage"));
         }
         return true;
     }
