@@ -84,6 +84,12 @@ public class PlayerManager {
         }
     }
 
+    /** Copie des décorations en mémoire d'un joueur, ou null si elles ne sont pas chargées. */
+    public Map<String, Long> snapshot(UUID uuid) {
+        Map<String, Long> data = playerDataCache.get(uuid);
+        return data == null ? null : new java.util.HashMap<>(data);
+    }
+
     public boolean hasCompleted(UUID uuid, String collectionId, String itemId) {
         return playerDataCache.getOrDefault(uuid, Map.of()).containsKey(collectionId + "." + itemId);
     }

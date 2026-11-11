@@ -88,6 +88,21 @@ public final class DisplayDatabase {
         return items;
     }
 
+    /** Séries dont la récompense a déjà été réservée par le joueur. */
+    public java.util.Set<String> loadRewards(UUID uuid) throws SQLException {
+        java.util.Set<String> collections = new java.util.HashSet<>();
+        try (Connection c = pool.getConnection();
+             PreparedStatement ps = c.prepareStatement("SELECT collection_id FROM " + REWARDS + " WHERE uuid = ?")) {
+            ps.setString(1, uuid.toString());
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    collections.add(rs.getString(1));
+                }
+            }
+        }
+        return collections;
+    }
+
     /** Enregistre une décoration. Vrai si la ligne est nouvelle ; une décoration déjà enregistrée garde sa première date. */
     public boolean insertItem(UUID uuid, String item, long date) throws SQLException {
         try (Connection c = pool.getConnection();

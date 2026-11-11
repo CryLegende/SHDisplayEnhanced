@@ -27,8 +27,11 @@ Utilisé sur : **Opale**.
 | Commande | Alias | Description | Permission |
 |---|---|---|---|
 | `/deco` | `/decorations` | Ouvre le menu principal des collections et de la boutique. | — |
-| `/shdeco reload` | `/shdisplay` | Recharge la configuration, les séries et la boutique. | `shdisplayenhanced.admin` |
-| `/shdeco import` | `/shdisplay` | Avec SHNetwork : copie `playerdata.db` dans la base du réseau, sans toucher aux décorations déjà présentes. | `shdisplayenhanced.admin` |
+| `/shdisplayenhanced reload` | `/shdeco`, `/shdisplay` | Relit `config.yml`, `messages.yml`, `shop.yml` et `collections/*.yml`. Si un fichier est invalide, rien n'est rechargé et le fichier fautif est indiqué. La section `reseau` demande un redémarrage. | `shdisplayenhanced.admin.reload` |
+| `/shdisplayenhanced import` | `/shdeco`, `/shdisplay` | Avec SHNetwork : copie `playerdata.db` dans la base du réseau, sans toucher aux décorations déjà présentes. | `shdisplayenhanced.admin.import` |
+| `/shdisplayenhanced info <joueur>` | `/shdeco`, `/shdisplay` | Affiche la progression d'un joueur : décorations par série, séries terminées et, avec SHNetwork, récompense déjà donnée. | `shdisplayenhanced.admin.info` |
+
+La console peut utiliser les sous-commandes d'administration.
 
 ## Plusieurs serveurs Opale (SHNetwork)
 
@@ -39,7 +42,7 @@ Avec SHNetwork, la base `bo_net` remplace `playerdata.db` :
 - les décorations d'un joueur sont lues à son arrivée, une fois que le serveur de départ a fini ses écritures (`awaitSaved`) ; avant cela, aucune décoration ne peut être enregistrée dans le menu ;
 - chaque décoration est écrite en base au moment où le joueur l'enregistre (`INSERT IGNORE`), plus à la déconnexion ; la sauvegarde de départ n'attend que les écritures en cours ;
 - la récompense d'une série est réservée en base (`INSERT IGNORE` dans `displayenhanced_rewards`) : le serveur qui crée la ligne donne la récompense, l'autre ne donne rien. Si la base ne répond pas après trois essais, aucune récompense n'est donnée et la console l'indique ;
-- `/shdeco import` reprend `playerdata.db` dans la base ; il peut être relancé sans rien écraser.
+- `/shdisplayenhanced import` reprend `playerdata.db` dans la base ; il peut être relancé sans rien écraser.
 
 Tables : `displayenhanced_items` (joueur, décoration, date) et `displayenhanced_rewards` (joueur, série, date), créées au démarrage si l'utilisateur a le droit CREATE (`sql/schema.sql` pour le faire à la main).
 
@@ -47,8 +50,12 @@ Tables : `displayenhanced_items` (joueur, décoration, date) et `displayenhanced
 
 | Permission | Description | Par défaut |
 |---|---|---|
-| `shdisplayenhanced.user` | Permet d'utiliser la commande /deco. | `true` |
-| `shdisplayenhanced.admin` | Permet d'utiliser les commandes d'administration. | `op` |
+| `shdisplayenhanced.admin` | Toutes les sous-commandes de `/shdisplayenhanced`. | `op` |
+| `shdisplayenhanced.admin.reload` | `/shdisplayenhanced reload`. | `op` |
+| `shdisplayenhanced.admin.import` | `/shdisplayenhanced import`. | `op` |
+| `shdisplayenhanced.admin.info` | `/shdisplayenhanced info`. | `op` |
+
+`/deco` n'a pas de permission : tous les joueurs l'utilisent.
 
 ## Configuration
 

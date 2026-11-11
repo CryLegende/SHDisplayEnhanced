@@ -17,16 +17,25 @@ commands:
     description: Ouvre le menu principal des collections et de la boutique.
     usage: /<command>
     aliases: [decorations]
-  shdeco:
-    description: Commande d'administration pour SHDisplayEnhanced.
-    usage: /<command> reload
-    aliases: [shdisplay]
-    permission: shdisplayenhanced.admin
+  shdisplayenhanced:
+    description: Administration de SHDisplayEnhanced.
+    usage: /<command> <reload|import|info>
+    aliases: [shdeco, shdisplay]
 
 permissions:
-  shdisplayenhanced.user:
-    description: Permet d'utiliser la commande /deco.
-    default: true
   shdisplayenhanced.admin:
-    description: Permet d'utiliser les commandes d'administration.
+    description: Toutes les sous-commandes de /shdisplayenhanced.
+    default: op
+    children:
+      shdisplayenhanced.admin.reload: true
+      shdisplayenhanced.admin.import: true
+      shdisplayenhanced.admin.info: true
+  shdisplayenhanced.admin.reload:
+    description: Recharger la configuration, les séries et la boutique (/shdisplayenhanced reload).
+    default: op
+  shdisplayenhanced.admin.import:
+    description: Copier playerdata.db dans la base du réseau (/shdisplayenhanced import, avec SHNetwork).
+    default: op
+  shdisplayenhanced.admin.info:
+    description: Voir la progression d'un joueur (/shdisplayenhanced info).
     default: op

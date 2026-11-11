@@ -17,18 +17,20 @@ import java.util.logging.Level;
 public class CollectionManager {
 
     private final SHDisplayEnhanced plugin;
-    private final Map<String, Collection> collections = new HashMap<>();
+    // Remplacée d'un bloc par loadCollections : un rechargement ne laisse jamais un état à moitié construit
+    private volatile Map<String, Collection> collections = new HashMap<>();
 
     public CollectionManager(SHDisplayEnhanced plugin) {
         this.plugin = plugin;
     }
 
     public void loadCollections() {
-        collections.clear(); // Vider les anciennes collections avant de recharger
+        Map<String, Collection> loaded = new HashMap<>();
         File collectionsDir = new File(plugin.getDataFolder(), "collections");
 
         if (!collectionsDir.exists() || !collectionsDir.isDirectory() || collectionsDir.listFiles() == null) {
             plugin.getLogger().warning("Le dossier des collections est vide ou n'existe pas. Aucune collection ne sera chargée.");
+            collections = loaded;
             return;
         }
 
@@ -42,15 +44,16 @@ public class CollectionManager {
                     continue;
                 }
 
-                if (collections.containsKey(collectionId)) {
+                if (loaded.containsKey(collectionId)) {
                     plugin.getLogger().warning("ID de collection dupliqué : '" + collectionId + "'. Le fichier '" + file.getName() + "' sera ignoré.");
                     continue;
                 }
 
                 Collection collection = new Collection(collectionConfig);
-                collections.put(collection.getId(), collection);
+                loaded.put(collection.getId(), collection);
             }
         }
+        collections = loaded;
         plugin.getLogger().info(collections.size() + " collection(s) chargée(s).");
     }
 

@@ -16,14 +16,14 @@ import java.util.Map;
 public class ShopManager {
 
     private final SHDisplayEnhanced plugin;
-    private final Map<String, SellableItem> sellableItems = new HashMap<>();
+    private volatile Map<String, SellableItem> sellableItems = new HashMap<>();
 
     public ShopManager(SHDisplayEnhanced plugin) {
         this.plugin = plugin;
     }
 
     public void loadShopItems() {
-        sellableItems.clear();
+        Map<String, SellableItem> loaded = new HashMap<>();
         File shopFile = new File(plugin.getDataFolder(), "shop.yml");
         if (!shopFile.exists()) {
             plugin.saveResource("shop.yml", false);
@@ -33,6 +33,7 @@ public class ShopManager {
         ConfigurationSection mainSection = shopConfig.getConfigurationSection("sellable_items");
         if (mainSection == null) {
             plugin.getLogger().info("Aucune section 'sellable_items' trouvée dans shop.yml. La boutique de vente sera vide.");
+            sellableItems = loaded;
             return;
         }
 
@@ -61,10 +62,11 @@ public class ShopManager {
                 // --- MODIFICATION ICI ---
                 List<String> commands = itemSection.getStringList("commands");
                 List<String> sellPriceLore = itemSection.getStringList("sell_price_lore");
-                sellableItems.put(fullId, new SellableItem(fullId, linkedItem, commands, sellPriceLore));
+                loaded.put(fullId, new SellableItem(fullId, linkedItem, commands, sellPriceLore));
                 // --- FIN DE LA MODIFICATION ---
             }
         }
+        sellableItems = loaded;
         plugin.getLogger().info(sellableItems.size() + " décoration(s) vendable(s) chargée(s) depuis shop.yml.");
     }
 

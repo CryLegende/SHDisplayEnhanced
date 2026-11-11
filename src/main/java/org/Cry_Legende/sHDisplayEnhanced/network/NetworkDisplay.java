@@ -115,6 +115,16 @@ public final class NetworkDisplay {
         });
     }
 
+    /** Décorations d'un joueur lues en base (hors fil principal), pour /shdisplayenhanced info. */
+    public Map<String, Long> readItems(UUID uuid) throws SQLException {
+        return db.load(uuid);
+    }
+
+    /** Séries dont la récompense est déjà réservée en base pour ce joueur (hors fil principal). */
+    public Set<String> readRewards(UUID uuid) throws SQLException {
+        return db.loadRewards(uuid);
+    }
+
     // ------------------------------------------------------------------ écritures
 
     /** Écrit tout de suite la décoration que le joueur vient d'enregistrer (fil principal). */

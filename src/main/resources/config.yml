@@ -8,15 +8,23 @@
 # Avec SHNetwork, les décorations enregistrées et les séries récompensées sont dans la base du réseau
 # (voir la section 'reseau' en bas du fichier).
 #
-# Commandes :
-#   /deco (alias /decorations)  Ouvre le menu des séries et de la boutique.
-#   /shdeco reload              Recharge la configuration, les séries et la boutique.
-#   /shdeco import              Avec SHNetwork : copie playerdata.db dans la base du réseau,
-#                               sans toucher aux décorations déjà présentes.
+# Commandes (la console peut les utiliser) :
+#   /deco (alias /decorations)        Ouvre le menu des séries et de la boutique.
+#   /shdisplayenhanced reload         Relit config.yml, messages.yml, shop.yml et collections/*.yml. Si un fichier est
+#                                     invalide, rien n'est rechargé et le fichier fautif est indiqué. Les décorations
+#                                     des joueurs ne sont pas touchées ; la section 'reseau' demande un redémarrage.
+#   /shdisplayenhanced import         Avec SHNetwork : copie playerdata.db dans la base du réseau,
+#                                     sans toucher aux décorations déjà présentes.
+#   /shdisplayenhanced info <joueur>  Affiche la progression d'un joueur : décorations par série, séries terminées
+#                                     et, avec SHNetwork, récompense déjà donnée.
+#   Alias de /shdisplayenhanced : /shdeco, /shdisplay.
 #
 # Permissions :
-#   shdisplayenhanced.user    Utiliser /deco (par défaut : tous les joueurs).
-#   shdisplayenhanced.admin   /shdeco reload et /shdeco import (par défaut : op).
+#   shdisplayenhanced.admin          Toutes les sous-commandes (par défaut : op).
+#   shdisplayenhanced.admin.reload   /shdisplayenhanced reload (par défaut : op).
+#   shdisplayenhanced.admin.import   /shdisplayenhanced import (par défaut : op).
+#   shdisplayenhanced.admin.info     /shdisplayenhanced info (par défaut : op).
+#   /deco n'a pas de permission : tous les joueurs l'utilisent.
 #
 # ======================================================================== #
 
@@ -30,7 +38,7 @@ gui:
     name: "&cAucune série trouvée"
     lore:
       - "&7Vérifiez le dossier 'plugins/SHDisplayEnhanced/collections/'"
-      - "&7et rechargez avec /shdeco reload."
+      - "&7et rechargez avec /shdisplayenhanced reload."
   navigation:
     back_button:
       material: PAPER
@@ -113,7 +121,7 @@ gui:
 # les décorations restent dans playerdata.db de ce serveur, écrites à la déconnexion, comme avant.
 # Avec SHNetwork, la base du réseau remplace playerdata.db : les décorations d'un joueur sont lues à son arrivée,
 # une fois que le serveur de départ a fini d'écrire, et écrites au moment où il les enregistre. La récompense d'une
-# série est réservée en base : un seul serveur la donne, une seule fois. Reprendre playerdata.db : /shdeco import.
+# série est réservée en base : un seul serveur la donne, une seule fois. Reprendre playerdata.db : /shdisplayenhanced import.
 # Demande un redémarrage : tout (actif, attente-depart-secondes, base-de-donnees).
 reseau:
   actif: true
