@@ -117,7 +117,7 @@ gui:
       - ""
       - "&8&o(( &e&oCliquez sur un objet pour le vendre. &8&o))"
 
-# Plusieurs serveurs Opale (SHNetwork). Sans SHNetwork, ou avec actif: false, rien de cette section n'est lu :
+# Plusieurs serveurs de jeu (SHNetwork). Sans SHNetwork, ou avec actif: false, rien de cette section n'est lu :
 # les décorations restent dans playerdata.db de ce serveur, écrites à la déconnexion, comme avant.
 # Avec SHNetwork, la base du réseau remplace playerdata.db : les décorations d'un joueur sont lues à son arrivée,
 # une fois que le serveur de départ a fini d'écrire, et écrites au moment où il les enregistre. La récompense d'une
@@ -129,7 +129,7 @@ reseau:
   attente-depart-secondes: 30
   # Base partagée par tous les serveurs : tables displayenhanced_items (décorations) et displayenhanced_rewards (séries payées)
   base-de-donnees:
-    url: "jdbc:mariadb://127.0.0.1:3306/bo_net"
+    url: "jdbc:mariadb://127.0.0.1:3306/minecraft"
     utilisateur: shdisplayenhanced
     mot-de-passe: CHANGE_ME
     # Délai maximal de connexion et de réponse de la base, en millisecondes
