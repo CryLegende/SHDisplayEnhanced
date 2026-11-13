@@ -20,7 +20,7 @@ Utilisé sur : **Opale**.
 
 ## Dépendances
 
-- Optionnelles : `PlaceholderAPI`, `Vault`, `SHNetwork` (plusieurs serveurs Opale, voir plus bas)
+- Optionnelles : `PlaceholderAPI`, `Vault`, `SHNetwork` (plusieurs serveurs de jeu, voir plus bas)
 
 ## Commandes
 
@@ -33,11 +33,11 @@ Utilisé sur : **Opale**.
 
 La console peut utiliser les sous-commandes d'administration.
 
-## Plusieurs serveurs Opale (SHNetwork)
+## Plusieurs serveurs de jeu (SHNetwork)
 
 Sans SHNetwork, ou avec `reseau.actif: false`, rien ne change : les décorations enregistrées sont dans `playerdata.db` (SQLite) de chaque serveur et écrites à la déconnexion.
 
-Avec SHNetwork, la base `bo_net` remplace `playerdata.db` :
+Avec SHNetwork, la base du réseau remplace `playerdata.db` :
 
 - les décorations d'un joueur sont lues à son arrivée, une fois que le serveur de départ a fini ses écritures (`awaitSaved`) ; avant cela, aucune décoration ne peut être enregistrée dans le menu ;
 - chaque décoration est écrite en base au moment où le joueur l'enregistre (`INSERT IGNORE`), plus à la déconnexion ; la sauvegarde de départ n'attend que les écritures en cours ;
